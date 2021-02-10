@@ -1,8 +1,16 @@
 from flask import Flask, jsonify
 from random import randint
 import sqlite3
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
+cors = CORS(app, resources={
+    r"/*" :{
+        "origin": "*"
+    }
+})
 
 @app.route('/phrase')
 def random_phrase():
