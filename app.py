@@ -8,10 +8,16 @@ app = Flask(__name__)
 def random_phrase():
 
     try:
-        # connect at the DB and get phrase
+        # connect at the DB
         conn = sqlite3.connect('DB/phrases.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT ID, AUTOR, PHRASE FROM ALL_PHRASES WHERE ID = {0}".format(randint(1,35)))
+
+        # Get len of array
+        cursor.execute("SELECT * FROM ALL_PHRASES")
+        all = len(cursor.fetchall())
+
+        #Get phrase by random id
+        cursor.execute("SELECT * FROM ALL_PHRASES WHERE ID = {0}".format(randint(1,all)))
         req = cursor.fetchone()
 
         # convert phrase in object
