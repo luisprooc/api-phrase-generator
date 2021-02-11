@@ -24,8 +24,14 @@ def random_phrase():
         cursor.execute("SELECT * FROM ALL_PHRASES")
         all = len(cursor.fetchall())
 
+        if all == 35:
+            all -= 1
+        
+        elif all == 4:
+            all += 1
+
         #Get phrase by random id
-        cursor.execute("SELECT * FROM ALL_PHRASES WHERE ID = {0}".format(randint(1,all)))
+        cursor.execute("SELECT * FROM ALL_PHRASES WHERE ID = {0}".format(randint(0,all)))
         req = cursor.fetchone()
 
         # convert phrase in object
